@@ -1,0 +1,35 @@
+{
+    "name": "nearata/flarum-ext-maintenance-mode",
+    "description": "no desc",
+    "keywords": [
+        "flarum"
+    ],
+    "type": "flarum-extension",
+    "license": "Unlicense",
+    "require": {
+        "flarum/core": "^1.7.0"
+    },
+    "authors": [
+        {
+            "name": "Nearata",
+            "email": "nearata@protonmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Nearata\\MaintenanceMode\\": "src/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Maintenance Mode",
+            "category": "feature",
+            "icon": {
+                "name": "fas fa-person-digging",
+                "color": "#fff",
+                "backgroundColor": "#502F4C"
+            }
+        }
+    }
+}
