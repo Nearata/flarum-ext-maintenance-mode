@@ -1,6 +1,6 @@
 # Maintenance Mode
 
-> no desc
+> Customizable maintenance mode
 
 ## Install
 

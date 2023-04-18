@@ -1,7 +1,5 @@
 nearata-maintenance-mode:
-  # For more details on the format
-  # Checkout https://docs.flarum.org/extend/i18n/#appendix-a-standard-key-format
-  admin:
-    my_cool_key: My Cool Key
-
   forum:
+    page_title: Maintenance
+  ref:
+    title: Currently down for maintenance. Please come back later.

@@ -1,3 +1,3 @@
 import app from "flarum/forum/app";
 
-app.initializers.add("nearata/flarum-ext-maintenance-mode", () => {});
+app.initializers.add("nearata-maintenance-mode", () => {});

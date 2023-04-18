@@ -3,6 +3,8 @@
 namespace Nearata\MaintenanceMode;
 
 use Flarum\Extend;
+use Nearata\MaintenanceMode\Api\Middleware\MaintenanceModeApiMiddleware;
+use Nearata\MaintenanceMode\Forum\Middleware\MaintenanceModeForumMiddleware;
 
 return [
     (new Extend\Frontend('forum'))
@@ -14,4 +16,13 @@ return [
         ->css(__DIR__.'/less/admin.less'),
 
     new Extend\Locales(__DIR__.'/locale'),
+
+    (new Extend\View)
+        ->namespace('nearata.maintenance-mode', __DIR__.'/views'),
+
+    (new Extend\Middleware('forum'))
+        ->add(MaintenanceModeForumMiddleware::class),
+
+    (new Extend\Middleware('api'))
+        ->add(MaintenanceModeApiMiddleware::class)
 ];

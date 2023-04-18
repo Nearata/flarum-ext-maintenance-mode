@@ -26,7 +26,7 @@
             "title": "Maintenance Mode",
             "category": "feature",
             "icon": {
-                "name": "fas fa-person-digging",
+                "name": "fas fa-radiation",
                 "color": "#fff",
                 "backgroundColor": "#502F4C"
             }
