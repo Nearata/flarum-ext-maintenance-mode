@@ -1,4 +1,7 @@
 nearata-maintenance-mode:
+  admin:
+    permissions:
+      bypass: Can bypass Maintenance Mode
   forum:
     page_title: Maintenance
   ref:

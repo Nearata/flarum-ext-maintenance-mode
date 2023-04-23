@@ -3,7 +3,9 @@
 namespace Nearata\MaintenanceMode;
 
 use Flarum\Extend;
+use Nearata\MaintenanceMode\Api\Controller\AuthController;
 use Nearata\MaintenanceMode\Api\Middleware\MaintenanceModeApiMiddleware;
+use Nearata\MaintenanceMode\Console\AuthCommand;
 use Nearata\MaintenanceMode\Forum\Middleware\MaintenanceModeForumMiddleware;
 
 return [
@@ -24,5 +26,11 @@ return [
         ->add(MaintenanceModeForumMiddleware::class),
 
     (new Extend\Middleware('api'))
-        ->add(MaintenanceModeApiMiddleware::class)
+        ->add(MaintenanceModeApiMiddleware::class),
+
+    (new Extend\Console)
+        ->command(AuthCommand::class),
+
+    (new Extend\Routes('forum'))
+        ->get('/nearata/maintenanceMode/auth/{token}', 'nearata-maintenance-mode.auth', AuthController::class)
 ];

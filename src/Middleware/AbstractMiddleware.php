@@ -3,8 +3,10 @@
 namespace Nearata\MaintenanceMode\Middleware;
 
 use Flarum\Foundation\Config;
+use Flarum\Http\RequestUtil;
 use Flarum\Locale\Translator;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Str;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -44,8 +46,18 @@ abstract class AbstractMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        $response = $handler->handle($request);
+
         if (!$this->inMaintenanceMode()) {
-            return $handler->handle($request);
+            return $response;
+        }
+
+        if (RequestUtil::getActor($request)->hasPermission('nearata-maintenance-mode.bypass')) {
+            return $response;
+        }
+
+        if ($this->isAuth($request)) {
+            return $response;
         }
 
         if ($this->isApiRequest) {
@@ -53,6 +65,11 @@ abstract class AbstractMiddleware implements MiddlewareInterface
         }
 
         return new HtmlResponse($this->view->make('nearata.maintenance-mode::default')->render(), 503);
+    }
+
+    private function isAuth(ServerRequestInterface $request): bool
+    {
+        return Str::startsWith($request->getUri()->getPath(), '/nearata/maintenanceMode/auth/');
     }
 
     private function apiResponse(): ResponseInterface
