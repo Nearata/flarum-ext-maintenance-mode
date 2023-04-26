@@ -31,16 +31,18 @@ class AuthController implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        $redirect = new RedirectResponse($this->url->to('forum')->base());
+
         $token = SessionAccessToken::findValid(Arr::get($request->getQueryParams(), 'token'));
 
         if (is_null($token)) {
-            return new RedirectResponse('/');
+            return $redirect;
         }
 
         $session = $request->getAttribute('session');
 
         $this->authenticator->logIn($session, $token);
 
-        return new RedirectResponse($this->url->to('forum')->base());
+        return $redirect;
     }
 }
