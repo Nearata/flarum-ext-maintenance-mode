@@ -14,3 +14,10 @@ composer require nearata/flarum-ext-maintenance-mode:"*"
 composer update nearata/flarum-ext-maintenance-mode:"*"
 php flarum cache:clear
 ```
+
+## Remove
+
+```sh
+composer remove nearata/flarum-ext-maintenance-mode
+php flarum cache:clear
+```

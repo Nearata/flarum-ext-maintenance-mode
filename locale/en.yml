@@ -1,5 +1,9 @@
 nearata-maintenance-mode:
   admin:
+    dashboard:
+      maintenance_widget:
+        title: Maintenance mode active
+        detail: During the maintenance, only authorised users can view the forum.
     permissions:
       bypass: Can bypass Maintenance Mode
   forum:

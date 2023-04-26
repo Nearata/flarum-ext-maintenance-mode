@@ -3,6 +3,7 @@
 namespace Nearata\MaintenanceMode;
 
 use Flarum\Extend;
+use Nearata\MaintenanceMode\Admin\Content\AdminPayload;
 use Nearata\MaintenanceMode\Api\Controller\AuthController;
 use Nearata\MaintenanceMode\Api\Middleware\MaintenanceModeApiMiddleware;
 use Nearata\MaintenanceMode\Console\AuthCommand;
@@ -15,7 +16,8 @@ return [
 
     (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js')
-        ->css(__DIR__.'/less/admin.less'),
+        ->css(__DIR__.'/less/admin.less')
+        ->content(AdminPayload::class),
 
     new Extend\Locales(__DIR__.'/locale'),
 
