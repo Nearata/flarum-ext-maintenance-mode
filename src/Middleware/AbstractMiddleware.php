@@ -46,18 +46,16 @@ abstract class AbstractMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $response = $handler->handle($request);
-
         if (!$this->inMaintenanceMode()) {
-            return $response;
+            return $handler->handle($request);
         }
 
         if (RequestUtil::getActor($request)->hasPermission('nearata-maintenance-mode.bypass')) {
-            return $response;
+            return $handler->handle($request);
         }
 
         if ($this->isAuth($request)) {
-            return $response;
+            return $handler->handle($request);
         }
 
         if ($this->isApiRequest) {
