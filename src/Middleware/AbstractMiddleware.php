@@ -2,13 +2,13 @@
 
 namespace Nearata\MaintenanceMode\Middleware;
 
-use Flarum\Foundation\Config;
 use Flarum\Http\RequestUtil;
 use Flarum\Locale\Translator;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Str;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
+use Nearata\MaintenanceMode\Foundation\Config;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -46,7 +46,7 @@ abstract class AbstractMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        if (!$this->inMaintenanceMode()) {
+        if (!$this->config->inMaintenanceMode()) {
             return $handler->handle($request);
         }
 
@@ -80,10 +80,5 @@ abstract class AbstractMiddleware implements MiddlewareInterface
             503,
             ['Content-Type' => 'application/vnd.api+json']
         );
-    }
-
-    private function inMaintenanceMode()
-    {
-        return $this->config['nearataMaintenanceMode'] ?? false;
     }
 }

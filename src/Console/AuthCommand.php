@@ -5,6 +5,7 @@ namespace Nearata\MaintenanceMode\Console;
 use Flarum\Console\AbstractCommand;
 use Flarum\Http\SessionAccessToken;
 use Flarum\Http\UrlGenerator;
+use Nearata\MaintenanceMode\Foundation\Config;
 use Symfony\Component\Console\Input\InputArgument;
 
 class AuthCommand extends AbstractCommand
@@ -17,6 +18,14 @@ class AuthCommand extends AbstractCommand
 
     protected function fire()
     {
+        /** @var Config */
+        $config = resolve(Config::class);
+
+        if (!$config->inMaintenanceMode()) {
+            $this->error('The Maintenance Mode is OFF');
+            return;
+        }
+
         $userId = (int) $this->input->getArgument('user-id');
 
         if (!$userId) {
