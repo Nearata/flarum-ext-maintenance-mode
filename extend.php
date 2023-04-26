@@ -4,7 +4,7 @@ namespace Nearata\MaintenanceMode;
 
 use Flarum\Extend;
 use Nearata\MaintenanceMode\Admin\Content\AdminPayload;
-use Nearata\MaintenanceMode\Api\Controller\AuthController;
+use Nearata\MaintenanceMode\Forum\Controller\AuthController;
 use Nearata\MaintenanceMode\Api\Middleware\MaintenanceModeApiMiddleware;
 use Nearata\MaintenanceMode\Console\AuthCommand;
 use Nearata\MaintenanceMode\Forum\Middleware\MaintenanceModeForumMiddleware;
