@@ -5,19 +5,30 @@ import { extend } from "flarum/common/extend";
 
 app.initializers.add("nearata-maintenance-mode", () => {
   extend(DashboardPage.prototype, "availableWidgets", function (items) {
-    if (app.data.nearataMaintenanceMode) {
+    const setting = app.data.settings["nearata-maintenance-mode.enabled"];
+
+    if (setting === "1" || setting === true) {
       items.add("maintenance", <MaintenanceModeWidget />, 100);
     }
   });
 
-  app.extensionData.for("nearata-maintenance-mode").registerPermission(
-    {
-      icon: "fas fa-radiation",
+  app.extensionData
+    .for("nearata-maintenance-mode")
+    .registerSetting({
+      setting: "nearata-maintenance-mode.enabled",
+      type: "switch",
       label: app.translator.trans(
-        "nearata-maintenance-mode.admin.permissions.bypass"
+        "nearata-maintenance-mode.admin.settings.maintenance_mode_enabled.label"
       ),
-      permission: "nearata-maintenance-mode.bypass",
-    },
-    "view"
-  );
+    })
+    .registerPermission(
+      {
+        icon: "fas fa-radiation",
+        label: app.translator.trans(
+          "nearata-maintenance-mode.admin.permissions.bypass"
+        ),
+        permission: "nearata-maintenance-mode.bypass",
+      },
+      "view"
+    );
 });

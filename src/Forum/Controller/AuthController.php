@@ -1,13 +1,13 @@
 <?php
 
-namespace Nearata\MaintenanceMode\Api\Controller;
+namespace Nearata\MaintenanceMode\Forum\Controller;
 
 use Flarum\Http\SessionAccessToken;
 use Flarum\Http\SessionAuthenticator;
 use Flarum\Http\UrlGenerator;
 use Illuminate\Support\Arr;
 use Laminas\Diactoros\Response\RedirectResponse;
-use Nearata\MaintenanceMode\Foundation\Config;
+use Nearata\MaintenanceMode\Foundation\Settings;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -25,22 +25,22 @@ class AuthController implements RequestHandlerInterface
     protected $authenticator;
 
     /**
-     * @var Config
+     * @var Settings
      */
-    protected $config;
+    protected $settings;
 
-    public function __construct(UrlGenerator $url, SessionAuthenticator $authenticator, Config $config)
+    public function __construct(UrlGenerator $url, SessionAuthenticator $authenticator, Settings $settings)
     {
         $this->url = $url;
         $this->authenticator = $authenticator;
-        $this->config = $config;
+        $this->settings = $settings;
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $redirect = new RedirectResponse($this->url->to('forum')->base());
 
-        if (!$this->config->inMaintenanceMode()) {
+        if (!$this->settings->inMaintenanceMode()) {
             return $redirect;
         }
 

@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Str;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\JsonResponse;
-use Nearata\MaintenanceMode\Foundation\Config;
+use Nearata\MaintenanceMode\Foundation\Settings;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -23,9 +23,9 @@ abstract class AbstractMiddleware implements MiddlewareInterface
     protected $isApiRequest = false;
 
     /**
-     * @var Config
+     * @var Settings
      */
-    protected $config;
+    protected $settings;
 
     /**
      * @var Factory
@@ -37,16 +37,16 @@ abstract class AbstractMiddleware implements MiddlewareInterface
      */
     protected $translator;
 
-    public function __construct(Config $config, Factory $view, Translator $translator)
+    public function __construct(Settings $settings, Factory $view, Translator $translator)
     {
-        $this->config = $config;
+        $this->settings = $settings;
         $this->view = $view;
         $this->translator = $translator;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        if (!$this->config->inMaintenanceMode()) {
+        if (!$this->settings->inMaintenanceMode()) {
             return $handler->handle($request);
         }
 

@@ -3,21 +3,15 @@
 namespace Nearata\MaintenanceMode;
 
 use Flarum\Extend;
-use Nearata\MaintenanceMode\Admin\Content\AdminPayload;
 use Nearata\MaintenanceMode\Forum\Controller\AuthController;
 use Nearata\MaintenanceMode\Api\Middleware\MaintenanceModeApiMiddleware;
 use Nearata\MaintenanceMode\Console\AuthCommand;
 use Nearata\MaintenanceMode\Forum\Middleware\MaintenanceModeForumMiddleware;
 
 return [
-    (new Extend\Frontend('forum'))
-        ->js(__DIR__.'/js/dist/forum.js')
-        ->css(__DIR__.'/less/forum.less'),
-
     (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js')
-        ->css(__DIR__.'/less/admin.less')
-        ->content(AdminPayload::class),
+        ->css(__DIR__.'/less/admin.less'),
 
     new Extend\Locales(__DIR__.'/locale'),
 
@@ -34,5 +28,8 @@ return [
         ->command(AuthCommand::class),
 
     (new Extend\Routes('forum'))
-        ->get('/nearata/maintenanceMode/auth/{token}', 'nearata-maintenance-mode.auth', AuthController::class)
+        ->get('/nearata/maintenanceMode/auth/{token}', 'nearata-maintenance-mode.auth', AuthController::class),
+
+    (new Extend\Settings)
+        ->default('nearata-maintenance-mode.enabled', false)
 ];
