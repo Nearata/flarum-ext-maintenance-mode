@@ -28,7 +28,7 @@ Switch the `Maintenance Mode` in the extension settings page.
 
 ## How to style
 
-To change the style of the page, there's no other way if not to override the file itself.
+To change the style of the page, there's no other way but to override the file itself.
 
 Follow the below link to see a how-to:
 
