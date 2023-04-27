@@ -75,7 +75,7 @@ abstract class AbstractMiddleware implements MiddlewareInterface
         return new JsonResponse(
             (new Document())->setErrors([
                 'status' => '503',
-                'title' => $this->translator->get('nearata-maintenance-mode.ref.title')
+                'title' => $this->translator->get('nearata-maintenance-mode.api.title')
             ]),
             503,
             ['Content-Type' => 'application/vnd.api+json']
