@@ -33,3 +33,15 @@ To change the style of the page, there's no other way but to override the file i
 Follow the below link to see a how-to:
 
 https://docs.flarum.org/extend/views/#overriding-views
+
+## How to bypass maintenance
+
+If you have permissions to bypass the maintenance mode,
+you can run the below command to generate a link to login
+in a authorized user.
+
+Assure you are in the `Flarum root folder`:
+
+```bash
+php flarum nearataMaintenanceMode:auth <user_id>
+```
