@@ -1,6 +1,6 @@
 {
     "name": "nearata/flarum-ext-maintenance-mode",
-    "description": "no desc",
+    "description": "Customizable maintenance mode",
     "keywords": [
         "flarum"
     ],
