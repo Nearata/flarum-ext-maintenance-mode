@@ -26,6 +26,20 @@ php flarum cache:clear
 
 Switch the `Maintenance Mode` in the extension settings page.
 
+Or with API endpoint
+
+```bash
+/api/nearata/maintenanceMode/enabled
+```
+
+```json
+{
+  "value": true or false
+}
+```
+
+if the body is empty, it will be evaluated as false
+
 ## How to style
 
 To change the style of the page, there's no other way but to override the file itself.
