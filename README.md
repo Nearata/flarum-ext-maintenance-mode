@@ -29,7 +29,7 @@ Switch the `Maintenance Mode` in the extension settings page.
 Or with API endpoint
 
 ```bash
-/api/nearata/maintenanceMode/enabled
+PATCH /api/nearata/maintenanceMode/enabled
 ```
 
 ```json
