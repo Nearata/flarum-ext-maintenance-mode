@@ -22,15 +22,13 @@ class AuthCommand extends AbstractCommand
         $settings = resolve(Settings::class);
 
         if (!$settings->inMaintenanceMode()) {
-            $this->error('The Maintenance Mode is OFF');
-            return;
+            return $this->error('The Maintenance Mode is OFF');
         }
 
         $userId = (int) $this->input->getArgument('user-id');
 
         if (!$userId) {
-            $this->error('User not found.');
-            return;
+            return $this->error('User not found.');
         }
 
         $token = SessionAccessToken::generate($userId);

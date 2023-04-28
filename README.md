@@ -26,7 +26,13 @@ php flarum cache:clear
 
 Switch the `Maintenance Mode` in the extension settings page.
 
-Or with API endpoint
+### With a command
+
+```bash
+php flarum nearataMaintenanceMode:toggle <true or false>
+```
+
+### With API endpoint
 
 ```bash
 PATCH /api/nearata/maintenanceMode/enabled
@@ -38,7 +44,9 @@ PATCH /api/nearata/maintenanceMode/enabled
 }
 ```
 
-if the body is empty, it will be evaluated as false
+if the body is empty, it will be evaluated as false.
+
+An empty response is returned either way.
 
 ## How to style
 
@@ -59,3 +67,7 @@ Assure you are in the `Flarum root folder`:
 ```bash
 php flarum nearataMaintenanceMode:auth <user_id>
 ```
+
+## Note
+
+- If the database is inaccesible, that situation is not handled.

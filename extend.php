@@ -7,6 +7,7 @@ use Nearata\MaintenanceMode\Api\Controller\UpdateSettingController;
 use Nearata\MaintenanceMode\Forum\Controller\AuthController;
 use Nearata\MaintenanceMode\Api\Middleware\MaintenanceModeApiMiddleware;
 use Nearata\MaintenanceMode\Console\AuthCommand;
+use Nearata\MaintenanceMode\Console\ToggleCommand;
 use Nearata\MaintenanceMode\Forum\Middleware\MaintenanceModeForumMiddleware;
 
 return [
@@ -26,7 +27,8 @@ return [
         ->add(MaintenanceModeApiMiddleware::class),
 
     (new Extend\Console)
-        ->command(AuthCommand::class),
+        ->command(AuthCommand::class)
+        ->command(ToggleCommand::class),
 
     (new Extend\Routes('forum'))
         ->get('/nearata/maintenanceMode/auth/{token}', 'nearata-maintenance-mode.auth', AuthController::class),
