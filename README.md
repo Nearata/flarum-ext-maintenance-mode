@@ -70,4 +70,4 @@ php flarum nearataMaintenanceMode:auth <user_id>
 
 ## Note
 
-- If the database is inaccesible, that situation is not handled.
+- If the database is inaccessible, this situation is not handled.
