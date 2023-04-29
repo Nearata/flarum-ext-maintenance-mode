@@ -11,6 +11,8 @@
             display: grid;
             justify-content: center;
             justify-items: center;
+            gap: 1rem;
+            text-align: center;
         }
 
         .logo {
